@@ -12,7 +12,6 @@ FROM ariya/centos7-teamcity-agent
 
   ONBUILD RUN cpanm install DBD::ODBC; rm -fr root/.cpanm; exit 0
 
-  ADD swarm-client-2.0-jar-with-dependencies.jar swarm-client-2.0-jar-with-dependencies.jar
   ADD td-odbc-add bin/td-odbc-add
 
   #add add a dsn into the image
