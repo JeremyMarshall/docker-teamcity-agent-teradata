@@ -40,7 +40,8 @@ docker build -t my-own-container \
 
 * Run your new container with 
 ```
-docker run -e TEAMCITY_SERVER=http://builldserver7:8111 -dt -p 9090:9090 test
+docker run -e TEAMCITY_SERVER=http://builldserver7:8111 -dt \
+    -p 9090:9090 my-own-container
 ```
 
 * Builds on the fine work of hub.docker.com/r/ariya/centos7-teamcity-agent
