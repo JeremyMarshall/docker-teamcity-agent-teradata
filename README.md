@@ -44,7 +44,7 @@ docker run -e TEAMCITY_SERVER=http://builldserver7:8111 -dt \
     -p 9090:9090 my-own-container
 ```
 
-* Builds on the fine work of hub.docker.com/r/ariya/centos7-teamcity-agent
+* Builds on the fine work of https://hub.docker.com/r/ariya/centos7-teamcity-agent
 
 
 
