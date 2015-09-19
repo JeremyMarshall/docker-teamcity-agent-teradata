@@ -1,6 +1,6 @@
-# docker-jenkins-slave-teradata
+# docker-teamcity-agent-teradata
 
-This repo is to build a Docker Jenkins Slave with a Teradata client
+This repo is to build a Docker Teamcity agent with a Teradata client
 
 Its not quite as simple as that, you will also need to:-
 
@@ -11,7 +11,7 @@ Its not quite as simple as that, you will also need to:-
 * Create another Docker image from this one with a Dockerfile like this
 
 ```
-FROM jeremymarshall/docker-jenkins-slave-teradata
+FROM jeremymarshall/docker-teamcity-agent-teradata
 
   #add in DSNs for your Teradata servers
   RUN bin/td-odbc-add --dsn=<dsn> --DBCName=<ip|host>  --Username=<user> --Password=<pwd>
@@ -36,15 +36,14 @@ docker build -t my-own-container \
     --force-rm=true --no-cache=true .
 ```
 
-
-* Use the Jenkins swarm plugin as per [https://wiki.jenkins-ci.org/display/JENKINS/Swarm+Plugin]
+* You will also need a Teamcity Server
 
 * Run your new container with 
 ```
- docker run -i -t test my-own-container -master jenkins-url 
+docker run -e TEAMCITY_SERVER=http://builldserver7:8111 -dt -p 9090:9090 test
 ```
 
-Use any parameters for the jenkins swarm client directly
+* Builds on the fine work of hub.docker.com/r/ariya/centos7-teamcity-agent
 
 
 

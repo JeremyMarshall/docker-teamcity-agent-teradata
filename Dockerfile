@@ -1,6 +1,8 @@
-FROM centos:centos7
+FROM ariya/centos7-teamcity-agent
   MAINTAINER Jeremy Marshall
-  RUN yum -y install ksh java-1.7.0-openjdk git cpanm gcc perl perl-App-cpanminus perl-Config-Tiny &&  yum clean all
+  RUN yum -y install ksh tar java-1.7.0-openjdk git cpanm gcc perl perl-App-cpanminus perl-Config-Tiny &&  yum clean all
+
+  ADD setup-agent.sh /setup-agent.sh
 
   ONBUILD ADD  tdodbc__linux_indep.*.tar.gz tmp/
   ONBUILD RUN pushd tmp && find . -name '*.tar.gz' -exec tar zxvf {} --strip=1 \; && popd
@@ -12,8 +14,6 @@ FROM centos:centos7
 
   ADD swarm-client-2.0-jar-with-dependencies.jar swarm-client-2.0-jar-with-dependencies.jar
   ADD td-odbc-add bin/td-odbc-add
-
-  ENTRYPOINT ["java", "-jar", "swarm-client-2.0-jar-with-dependencies.jar", "-labels", "teradata-client", "-labels", "perl"]
 
   #add add a dsn into the image
   #RUN bin/td-odbc-add --dsn=<dsn> --DBCName=<ip|host>  --Username=<user> --Password=<pwd> 
